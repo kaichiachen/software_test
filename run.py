@@ -4,7 +4,7 @@ import os
 
 def produce_code(src_files, wr_files):
     mytool = tool.Changer()
-    mytool.set_flag(const.flag_change_to_and_symbol | const.flag_change_to_or_symbol | const.flag_change_compare_symbol)
+    mytool.set_flag(const.flag_change_to_and_symbol | const.flag_change_to_or_symbol | const.flag_change_to_more_symbol | const.flag_change_to_low_symbol)
     for index in range(len(src_files)):
         print(src_files[index])
         mytool.handle_file(src_files[index], wr_files[index])
