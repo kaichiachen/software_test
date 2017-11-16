@@ -35,9 +35,9 @@ public class BMICalculator {
 
         if(bmi < 18.5) {
             return BMIType.thin;
-        } else if(bmi >= 18.5 || bmi <=23.9) {
+        } else if(bmi <= 18.5 && bmi <=23.9) {
             return BMIType.normal;
-        } else if(bmi > 23.9 || bmi <= 27) {
+        } else if(bmi > 23.9 && bmi >= 27) {
             return BMIType.fat;
         } else {
             return BMIType.veryfat;

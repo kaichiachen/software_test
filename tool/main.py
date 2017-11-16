@@ -1,6 +1,7 @@
 import tool.const as const
 import os
 import errno
+import random
 
 class Changer():
     def __init__(self):
@@ -43,19 +44,25 @@ class Changer():
                     fw.write(line)
 
     def change_or_to_and(self,line):
-        line = line.replace('or','and')
-        line = line.replace('||','&&') 
+        v = random.randint(1,10)
+        if v < 5:
+            line = line.replace('||','&&') 
         return line
 
     def change_and_to_or(self,line):
-        line = line.replace('and','or')
-        line = line.replace('&&','||') 
+        v = random.randint(1,10)
+        if v < 5:
+            line = line.replace('&&','||') 
         return line
 
     def change_to_low(self, line):
-        line = line.replace('>','<')
+        v = random.randint(1,10)
+        if v < 5:
+            line = line.replace('>','<')
         return line
 
     def change_to_more(self, line):
-        line = line.replace('<','>')
+        v = random.randint(1,10)
+        if v < 5:
+            line = line.replace('<','>')
         return line
