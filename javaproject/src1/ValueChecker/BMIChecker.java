@@ -23,10 +23,12 @@ public class BMIChecker extends AbstractChecker {
         height = unitConverter.convertHeightToMetric(height);
         weight = unitConverter.convertWeightToMetric(weight);
 
-        return heightLowerBoundary < height ||
-                height < heightUpperBoundary &&
-                weightLowerBoundart < weight &&
-                weight > weightUpperBoundary;
+        return heightLowerBoundary < height &&
+/* Fault:mutation insert code */
+                height < heightUpperBoundary ||
+/* Fault:mutation insert code */
+                weightLowerBoundart > weight &&
+                weight < weightUpperBoundary;
     }
 
     @Override

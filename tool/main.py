@@ -33,36 +33,35 @@ class Changer():
                         raise
             with open(write_file, 'w+') as fw:
                 for line in fr.readlines():
+                    modify_index = []
                     if self.change_to_and_symbol:
-                        line = self.change_or_to_and(line)
+                        line, index = self.change_symbol(line,"||","&&", modify_index)
+                        modify_index.append(index)
+                        if index != -1:
+                            fw.write('/* Fault:mutation insert code */\n')
                     if self.change_to_or_symbol:
-                        line = self.change_and_to_or(line)
+                        line, index = self.change_symbol(line,"&&","||", modify_index)
+                        modify_index.append(index)
+                        if index != -1:
+                            fw.write('/* Fault:mutation insert code */\n')
                     if self.change_to_low_symbol:
-                        line = self.change_to_low(line)
+                        line, index = self.change_symbol(line,"<",">", modify_index)
+                        modify_index.append(index)
+                        if index != -1:
+                            fw.write('/* Fault:mutation insert code */\n')
                     if self.change_to_more_symbol:
-                        line = self.change_to_more(line)
+                        line, index = self.change_symbol(line,">","<", modify_index)
+                        modify_index.append(index)
+                        if index != -1:
+                            fw.write('/* Fault:mutation insert code */\n')
                     fw.write(line)
 
-    def change_or_to_and(self,line):
+    def change_symbol(self, line, fromm, to, modify_index):
         v = random.randint(1,10)
+        index = -1
         if v < 5:
-            line = line.replace('||','&&') 
-        return line
-
-    def change_and_to_or(self,line):
-        v = random.randint(1,10)
-        if v < 5:
-            line = line.replace('&&','||') 
-        return line
-
-    def change_to_low(self, line):
-        v = random.randint(1,10)
-        if v < 5:
-            line = line.replace('>','<')
-        return line
-
-    def change_to_more(self, line):
-        v = random.randint(1,10)
-        if v < 5:
-            line = line.replace('<','>')
-        return line
+            index = line.find(fromm)
+            if index != -1 and (index not in modify_index):
+                line = line.replace(fromm,to) 
+                return line, index
+        return line, -1
